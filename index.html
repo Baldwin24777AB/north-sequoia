@@ -21,6 +21,7 @@
   --soft: #EEF2EA;      /* pale green panel */
   --btn-bg: #183A28; --btn-fg: #FBF9F2; --btn-hover: #24533A;
   --ph-bg: #F3E4B4; --ph-fg: #4A3906;
+  --nav: #000000;
   --font-head: "Montserrat", "Gotham", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --gl: max(16px, env(safe-area-inset-left, 0px)); --gr: max(16px, env(safe-area-inset-right, 0px));
@@ -28,12 +29,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #101C15; --surface: #16261D; --ink: #ECE8DA; --text: #DCE2DD; --muted: #9AA9A0; --line: #263A2E; --soft: #16261D;
-    --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
+    --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #101C15; --surface: #16261D; --ink: #ECE8DA; --text: #DCE2DD; --muted: #9AA9A0; --line: #263A2E; --soft: #16261D;
-  --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
+  --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -68,8 +69,8 @@ header.site .wrap { display: flex; align-items: center; justify-content: space-b
 .brand::after { content: ""; position: absolute; left: -14px; right: -14px; bottom: 0; height: 3px; border-radius: 2px; background: var(--ink); }
 .brand img { height: 34px; width: auto; }
 nav.primary { display: flex; align-items: center; gap: 28px; }
-nav.primary a:not(.btn) { font-weight: 500; text-decoration: none; color: var(--muted); }
-nav.primary a:not(.btn):hover { color: var(--ink); }
+nav.primary a:not(.btn) { font-weight: 700; text-decoration: none; color: var(--nav); }
+nav.primary a:not(.btn):hover { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; }
 nav.primary .btn { padding: 10px 18px; }
 @media (max-width: 720px) { nav.primary a:not(.btn) { display: none; } .brand img { height: 26px; } }
 
