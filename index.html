@@ -150,7 +150,9 @@ footer.site img { height: 22px; width: auto; }
 
 @media (max-width: 860px) {
   .hero .wrap { grid-template-columns: 1fr; padding-block: 36px 44px; }
-  .hero .mark { display: none; }
+  .hero .wrap { gap: 28px; }
+  .hero .mark { order: -1; width: 150px; height: 150px; }
+  .hero .mark img { height: 108px; }
   .steps { grid-template-columns: 1fr; }
   .card { grid-template-columns: 1fr; grid-template-areas: "title" "desc" "list" "link"; row-gap: 12px; padding: 24px; }
   .card h3, .card .who { align-self: auto; }
