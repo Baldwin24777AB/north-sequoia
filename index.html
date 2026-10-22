@@ -23,6 +23,7 @@
   --ph-bg: #F3E4B4; --ph-fg: #4A3906;
   --nav: #000000;
   --gray: #A3A8A5;
+  --linkedin: #0A3D7A;
   --font-head: "Montserrat", "Gotham", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --gl: max(16px, env(safe-area-inset-left, 0px)); --gr: max(16px, env(safe-area-inset-right, 0px));
@@ -30,12 +31,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #101C15; --surface: #16261D; --ink: #ECE8DA; --text: #DCE2DD; --muted: #9AA9A0; --line: #263A2E; --soft: #16261D;
-    --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --gray: #6E7672; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
+    --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --gray: #6E7672; --linkedin: #8DB8EA; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #101C15; --surface: #16261D; --ink: #ECE8DA; --text: #DCE2DD; --muted: #9AA9A0; --line: #263A2E; --soft: #16261D;
-  --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --gray: #6E7672; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
+  --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --gray: #6E7672; --linkedin: #8DB8EA; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -62,6 +63,7 @@ a { color: inherit; }
 .btn:hover { background: var(--btn-hover); }
 .link { font: 700 0.92rem var(--font-head); color: var(--ink); text-decoration: none; }
 .link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.li-link { color: var(--linkedin); }
 
 /* header */
 header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
@@ -244,7 +246,7 @@ footer.site img { height: 22px; width: auto; }
           <h2>Hi, I'm Anthony.</h2>
           <p>~ Over 5 years of experience in Various Accounting Positions that include Casinos, Trucking, Solar, Farming, and many other small businesses!</p>
           <p>Like the sequoia, the best businesses grow steadily on strong roots. My job is to give you those roots: clean numbers and a clear plan.</p>
-          <a class="link" href="https://www.linkedin.com/in/anthony-baldwin-0954278b" target="_blank" rel="noopener">Connect with me on LinkedIn →</a>
+          <a class="link li-link" href="https://www.linkedin.com/in/anthony-baldwin-0954278b" target="_blank" rel="noopener">Connect with me on LinkedIn →</a>
         </div>
       </div>
     </div>
@@ -259,7 +261,7 @@ footer.site img { height: 22px; width: auto; }
           <p class="intro" style="margin-top:0">Send a message and I'll reply within one business day.</p>
           <dl class="lines">
             <div><dt>Email</dt><dd>Baldwin24777@gmail.com</dd></div>
-            <div><dt>LinkedIn</dt><dd><a class="link" href="https://www.linkedin.com/in/anthony-baldwin-0954278b" target="_blank" rel="noopener">Anthony Baldwin →</a></dd></div>
+            <div><dt>LinkedIn</dt><dd><a class="link li-link" href="https://www.linkedin.com/in/anthony-baldwin-0954278b" target="_blank" rel="noopener">Anthony Baldwin →</a></dd></div>
           </dl>
         </div>
         <form id="inquiry" novalidate>
