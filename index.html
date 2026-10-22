@@ -66,7 +66,7 @@ a { color: inherit; }
 .li-link { color: var(--linkedin); }
 
 /* header */
-header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
+header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 3px solid var(--gray); }
 header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
 .brand { display: block; line-height: 0; position: relative; padding-bottom: 8px; }
 .brand::after { content: ""; position: absolute; left: -14px; right: -14px; bottom: 0; height: 3px; border-radius: 2px; background: var(--ink); }
@@ -86,7 +86,7 @@ nav.primary .btn { padding: 10px 18px; }
 .hero .mark img { height: 72%; width: auto; }
 
 section { scroll-margin-top: 80px; }
-.sec .wrap { padding-block: 72px; border-top: 1px solid var(--line); }
+.sec .wrap { padding-block: 72px; border-top: 3px solid var(--gray); }
 .sec h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; margin-top: 10px; }
 .sec .intro { color: var(--muted); max-width: 52ch; margin-top: 12px; }
 
@@ -135,7 +135,7 @@ legend { font-size: 0.9rem; font-weight: 600; color: var(--ink); padding: 0; mar
 .choices input:focus-visible + label { outline: 3px solid var(--ink); outline-offset: 2px; }
 .status { font-size: 0.92rem; color: var(--muted); min-height: 1.4em; }
 
-footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-block: 32px; border-top: 1px solid var(--line); font-size: 0.88rem; color: var(--muted); }
+footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-block: 32px; border-top: 3px solid var(--gray); font-size: 0.88rem; color: var(--muted); }
 footer.site img { height: 22px; width: auto; }
 
 @media (max-width: 860px) {
