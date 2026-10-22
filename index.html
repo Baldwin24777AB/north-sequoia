@@ -109,7 +109,7 @@ section { scroll-margin-top: 80px; }
 .about { display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: start; }
 .portrait { display: block; width: 100%; aspect-ratio: 1; max-width: 100%; height: auto; border-radius: 50%; object-fit: cover; background: var(--soft); border: 3px solid var(--gray); box-shadow: 0 0 0 6px var(--bg), 0 0 0 7px var(--line); }
 .about-copy { display: grid; gap: 14px; max-width: 60ch; min-width: 0; }
-.about-copy p { color: var(--muted); }
+.about-copy p:not(.kicker) { color: var(--ink); }
 
 /* contact */
 .contact { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: start; margin-top: 8px; }
