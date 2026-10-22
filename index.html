@@ -22,6 +22,7 @@
   --btn-bg: #183A28; --btn-fg: #FBF9F2; --btn-hover: #24533A;
   --ph-bg: #F3E4B4; --ph-fg: #4A3906;
   --nav: #000000;
+  --gray: #A3A8A5;
   --font-head: "Montserrat", "Gotham", "Helvetica Neue", Arial, sans-serif;
   --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
   --gl: max(16px, env(safe-area-inset-left, 0px)); --gr: max(16px, env(safe-area-inset-right, 0px));
@@ -29,12 +30,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #101C15; --surface: #16261D; --ink: #ECE8DA; --text: #DCE2DD; --muted: #9AA9A0; --line: #263A2E; --soft: #16261D;
-    --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
+    --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --gray: #6E7672; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #101C15; --surface: #16261D; --ink: #ECE8DA; --text: #DCE2DD; --muted: #9AA9A0; --line: #263A2E; --soft: #16261D;
-  --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
+  --btn-bg: #ECE8DA; --btn-fg: #183A28; --btn-hover: #FFFFFF; --nav: #FFFFFF; --gray: #6E7672; --ph-bg: #4A3B10; --ph-fg: #F5E6AE; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -79,7 +80,7 @@ nav.primary .btn { padding: 10px 18px; }
 .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; }
 .hero p { font-size: 1.2rem; font-weight: 400; color: var(--nav); max-width: 40ch; margin-top: 20px; }
 .hero .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 32px; }
-.hero .mark { justify-self: center; background: var(--soft); border: 3px solid var(--ink); box-shadow: 0 0 0 8px var(--bg), 0 0 0 9px var(--line); border-radius: 50%; width: min(300px, 100%); aspect-ratio: 1; display: grid; place-items: center; }
+.hero .mark { justify-self: center; background: var(--soft); border: 3px solid var(--gray); box-shadow: 0 0 0 8px var(--bg), 0 0 0 9px var(--line); border-radius: 50%; width: min(300px, 100%); aspect-ratio: 1; display: grid; place-items: center; }
 .hero .mark img { height: 72%; width: auto; }
 
 section { scroll-margin-top: 80px; }
