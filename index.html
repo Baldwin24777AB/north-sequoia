@@ -310,6 +310,12 @@ footer.site img { height: 22px; width: auto; }
 
 <script>
 (function () {
+  // Always open at the top: drop any saved scroll position or #section left in the URL.
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+  function toTop() { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
+  toTop();
+  window.addEventListener('load', toTop);
   document.getElementById('year').textContent = new Date().getFullYear();
   document.querySelectorAll('[data-service]').forEach(function (a) {
     a.addEventListener('click', function () { document.getElementById('s-' + a.dataset.service).checked = true; });
