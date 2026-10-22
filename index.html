@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>North Sequoia</title>
+<meta name="description" content="North Sequoia: freelance bookkeeping, financial consulting, and scaling strategies for small businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: editorial, type-led. Lowercase nav, an oversized statement hero beside a slowly drawing growth-ring field, an indexed services list, a card feed of field notes, and a people-first about + contact close. Navy, glacier white, and brass: deliberately away from green so it never reads as another Sequoia brand. */
+:root {
+  --bg: #F3F3EF;         /* glacier white */
+  --surface: #FFFFFF;
+  --ink: #131A2A;        /* north navy */
+  --muted: #59607A;
+  --line: #D9DAD5;
+  --deep: #131A2A;       /* dark bands */
+  --on-deep: #EEF0F4;
+  --on-deep-muted: #A3AAC0;
+  --deep-line: rgba(238, 240, 244, 0.16);
+  --brass: #9A7330;      /* accent on light */
+  --brass-bright: #D7B46A; /* accent on dark */
+  --ring: rgba(19, 26, 42, 0.22);
+  --ph-bg: #F2E3B3; --ph-fg: #4A3906;
+  --btn-bg: #131A2A; --btn-fg: #F3F3EF;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --s-xs: 0.8125rem; --s-sm: 0.9375rem; --s-md: 1.0625rem; --s-lg: 1.375rem; --s-xl: clamp(1.9rem, 3.4vw, 2.75rem); --s-hero: clamp(2.6rem, 6.4vw, 5.4rem);
+  --gl: max(16px, env(safe-area-inset-left, 0px)); --gr: max(16px, env(safe-area-inset-right, 0px));
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D1220; --surface: #151C2E; --ink: #E9ECF3; --muted: #9AA2BA; --line: #262F45;
+    --deep: #070A13; --on-deep: #E9ECF3; --on-deep-muted: #8E97B0; --deep-line: rgba(233, 236, 243, 0.12);
+    --brass: #D7B46A; --brass-bright: #E2C27E; --ring: rgba(233, 236, 243, 0.2);
+    --ph-bg: #4A3B10; --ph-fg: #F5E6AE; --btn-bg: #D7B46A; --btn-fg: #0D1220; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D1220; --surface: #151C2E; --ink: #E9ECF3; --muted: #9AA2BA; --line: #262F45;
+  --deep: #070A13; --on-deep: #E9ECF3; --on-deep-muted: #8E97B0; --deep-line: rgba(233, 236, 243, 0.12);
+  --brass: #D7B46A; --brass-bright: #E2C27E; --ring: rgba(233, 236, 243, 0.2);
+  --ph-bg: #4A3B10; --ph-fg: #F5E6AE; --btn-bg: #D7B46A; --btn-fg: #0D1220; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: var(--s-md); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 500; line-height: 1.08; letter-spacing: -0.02em; text-wrap: balance; margin: 0; }
+p, ul, ol, dl { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; border-radius: 3px; }
+.wrap { max-width: 1200px; margin: 0 auto; padding-left: var(--gl); padding-right: var(--gr); }
+.label { font: 500 var(--s-xs) var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--brass); }
+.dark .label { color: var(--brass-bright); }
+.ph { background: var(--ph-bg); color: var(--ph-fg); border-radius: 3px; padding: 0 0.25em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.note { background: var(--ph-bg); color: var(--ph-fg); font-size: var(--s-xs); }
+.note .wrap { padding-block: 7px; }
+
+.btn { display: inline-flex; align-items: center; gap: 10px; font: 600 var(--s-xs) var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; padding: 15px 22px; border-radius: 2px; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.btn-solid { background: var(--btn-bg); color: var(--btn-fg); }
+.btn-solid:hover { background: var(--brass); color: #fff; }
+.btn-line { border-color: currentColor; color: var(--ink); background: transparent; }
+.btn-line:hover { background: var(--ink); color: var(--bg); }
+.dark .btn-solid { background: var(--brass-bright); color: #131A2A; }
+.dark .btn-solid:hover { background: var(--on-deep); }
+.arrow { transition: transform .2s ease; }
+a:hover .arrow, button:hover .arrow { transform: translateX(4px); }
+
+/* header */
+header.site { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); }
+header.site .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 18px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+.brand svg { flex: none; color: var(--brass); }
+nav.primary { display: flex; align-items: center; gap: 28px; font-size: var(--s-sm); }
+nav.primary a { text-decoration: none; color: var(--muted); }
+nav.primary a:hover { color: var(--ink); }
+nav.primary .btn { padding: 11px 16px; }
+@media (max-width: 860px) { nav.primary a:not(.btn) { display: none; } }
+
+/* hero */
+.hero .wrap { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 40px; align-items: end; padding-block: 64px 72px; }
+.hero h1 { font-size: var(--s-hero); font-weight: 500; }
+.hero h1 .soft { color: var(--muted); }
+.hero-side { display: grid; gap: 24px; min-width: 0; }
+.rings { position: relative; aspect-ratio: 1; max-width: 100%; }
+.rings canvas { width: 100%; height: 100%; display: block; }
+.hero-sub { font-size: var(--s-lg); line-height: 1.45; color: var(--muted); max-width: 30ch; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.hero-copy { min-width: 0; }
+
+/* ticker strip */
+.strip { border-block: 1px solid var(--line); }
+.strip .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 28px; padding-block: 16px; font: 400 var(--s-xs) var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* sections */
+section { scroll-margin-top: 84px; }
+.block .wrap { padding-block: 104px; }
+.head { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; align-items: end; margin-bottom: 56px; }
+.head h2 { font-size: var(--s-xl); }
+.head p { color: var(--muted); max-width: 46ch; }
+.dark { background: var(--deep); color: var(--on-deep); }
+.dark .head p, .dark .muted { color: var(--on-deep-muted); }
+
+/* services index */
+.index { border-top: 1px solid var(--ink); }
+.svc { display: grid; grid-template-columns: 220px 1fr 1fr; gap: 24px 40px; padding-block: 36px; border-bottom: 1px solid var(--line); align-items: start; }
+.svc h3 { font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+.svc p { color: var(--muted); max-width: 44ch; }
+.svc ul { list-style: none; padding: 0; display: grid; gap: 6px; font-size: var(--s-sm); }
+.svc li { display: flex; gap: 10px; }
+.svc li::before { content: "+"; color: var(--brass); font-family: var(--font-mono); }
+.svc .label { padding-top: 10px; }
+
+/* month card + fit */
+.month { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center; }
+.ledger { background: var(--surface); color: var(--ink); border-radius: 4px; padding: 26px; min-width: 0; }
+.ledger-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.ledger-top h3 { font-size: 1.15rem; }
+.ledger-top .label { color: var(--muted); }
+.ledger table { width: 100%; border-collapse: collapse; font: 400 0.86rem var(--font-mono); font-variant-numeric: tabular-nums; }
+.ledger td { padding: 10px 0; border-bottom: 1px dotted var(--line); }
+.ledger td:last-child { text-align: right; }
+.ledger .neg { color: var(--brass); }
+.ledger tr.total td { border-bottom: 0; border-top: 2px solid var(--ink); font-weight: 500; }
+.ledger .done { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 14px; font-size: var(--s-xs); color: var(--muted); }
+.ledger .done span::before { content: "✓ "; color: var(--brass); }
+.fit { display: grid; gap: 0; border-top: 1px solid var(--deep-line); }
+.fit div { padding-block: 20px; border-bottom: 1px solid var(--deep-line); display: grid; gap: 4px; }
+.fit h3 { font-size: var(--s-lg); font-weight: 500; letter-spacing: -0.01em; }
+
+/* process */
+.steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; gap: 10px; align-content: start; min-width: 0; padding-top: 18px; border-top: 1px solid var(--ink); }
+.steps li::before { content: counter(s, decimal-leading-zero); font: 500 var(--s-xs) var(--font-mono); color: var(--brass); }
+.steps h3 { font-size: var(--s-lg); }
+.steps p { color: var(--muted); font-size: var(--s-sm); }
+.steps .when { font: 400 var(--s-xs) var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* pricing */
+.plans { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: var(--surface); }
+.plan { padding: 32px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.plan + .plan { border-left: 1px solid var(--line); }
+.plan.featured { background: var(--deep); color: var(--on-deep); }
+.plan.featured p, .plan.featured small { color: var(--on-deep-muted); }
+.plan.featured .label { color: var(--brass-bright); }
+.plan h3 { font-size: 1.7rem; }
+.plan .price { font: 500 1.1rem var(--font-mono); font-variant-numeric: tabular-nums; }
+.plan .price small { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+.plan p { color: var(--muted); font-size: var(--s-sm); }
+.plan ul { list-style: none; padding: 0; display: grid; gap: 8px; font-size: var(--s-sm); }
+.plan li::before { content: "+ "; color: var(--brass); font-family: var(--font-mono); }
+.plan.featured li::before { color: var(--brass-bright); }
+.plan .btn { justify-self: start; margin-top: 8px; }
+.plan.featured .btn-line { color: var(--on-deep); }
+.plan.featured .btn-line:hover { background: var(--on-deep); color: var(--deep); }
+.fine { margin-top: 18px; font-size: var(--s-xs); color: var(--muted); }
+
+/* testimonials */
+.quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px; }
+.quotes figure { margin: 0; display: grid; gap: 18px; padding-top: 24px; border-top: 1px solid var(--deep-line); }
+.quotes blockquote { margin: 0; font-family: var(--font-display); font-size: clamp(1.3rem, 2vw, 1.65rem); line-height: 1.3; letter-spacing: -0.01em; }
+.quotes figcaption { font: 400 var(--s-xs) var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--on-deep-muted); }
+
+/* about */
+.person { display: grid; grid-template-columns: 340px 1fr; gap: 64px; align-items: start; }
+.portrait { aspect-ratio: 4 / 5; max-width: 100%; background: var(--surface); border: 1px dashed var(--line); display: grid; place-items: center; color: var(--muted); font-size: var(--s-sm); text-align: center; padding: 16px; }
+.person-copy { display: grid; gap: 20px; max-width: 62ch; min-width: 0; }
+.person-copy h2 { font-size: var(--s-xl); }
+.person-copy .role { font: 400 var(--s-xs) var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.person-copy p { color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips span { font: 400 0.78rem var(--font-mono); border: 1px solid var(--line); padding: 5px 12px; border-radius: 999px; }
+
+/* field notes */
+.notes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.card { display: grid; grid-template-rows: auto 1fr auto; gap: 18px; background: var(--surface); padding: 26px; border-radius: 4px; min-width: 0; text-decoration: none; transition: transform .2s ease; }
+.card:hover { transform: translateY(-3px); }
+.card .meta { display: flex; justify-content: space-between; gap: 12px; font: 400 var(--s-xs) var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.card h3 { font-size: 1.35rem; }
+.card .go { font: 600 var(--s-xs) var(--font-body); letter-spacing: 0.1em; text-transform: uppercase; color: var(--brass); }
+
+/* faq */
+.faq { border-top: 1px solid var(--ink); max-width: 820px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; padding: 22px 40px 22px 0; position: relative; font-family: var(--font-display); font-size: var(--s-lg); letter-spacing: -0.01em; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 4px; top: 18px; font: 400 1.5rem var(--font-mono); color: var(--brass); transition: transform .2s ease; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { padding-bottom: 24px; color: var(--muted); max-width: 64ch; }
+
+/* contact */
+.contact { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 64px; align-items: start; }
+.contact-info { display: grid; gap: 22px; min-width: 0; }
+.contact-info h2 { font-size: var(--s-xl); }
+.lines { display: grid; gap: 16px; }
+.lines div { display: grid; gap: 2px; }
+.lines dt { font: 400 var(--s-xs) var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--on-deep-muted); }
+.lines dd { margin: 0; font-size: var(--s-md); overflow-wrap: anywhere; user-select: all; }
+form { display: grid; gap: 18px; min-width: 0; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font: 400 var(--s-xs) var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--on-deep-muted); }
+.field input, .field select, .field textarea { font: 400 1rem var(--font-body); color: var(--on-deep); background: transparent; border: 0; border-bottom: 1px solid var(--on-deep-muted); padding: 10px 0; width: 100%; border-radius: 0; }
+.field select option { color: #131A2A; }
+.field textarea { min-height: 96px; resize: vertical; }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-bottom-color: var(--brass-bright); }
+.status { font-size: var(--s-sm); color: var(--on-deep-muted); min-height: 1.4em; }
+.news { margin-top: 72px; padding-top: 32px; border-top: 1px solid var(--deep-line); display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; align-items: end; }
+.news h3 { font-size: var(--s-lg); }
+.news form { grid-template-columns: 1fr auto; align-items: end; gap: 16px; }
+
+footer.site { background: var(--deep); color: var(--on-deep-muted); }
+footer.site .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-block: 28px; font-size: var(--s-xs); border-top: 1px solid var(--deep-line); }
+.motion-toggle { font: 400 var(--s-xs) var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; background: none; border: 1px solid var(--deep-line); color: var(--on-deep); padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+
+@media (max-width: 960px) {
+  .hero .wrap { grid-template-columns: 1fr; padding-block: 40px 56px; }
+  .rings { max-width: 340px; }
+  .head, .month, .person, .contact, .news { grid-template-columns: 1fr; }
+  .svc { grid-template-columns: 1fr; gap: 12px; }
+  .svc .label { padding-top: 0; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .plans { grid-template-columns: 1fr; }
+  .plan + .plan { border-left: 0; border-top: 1px solid var(--line); }
+  .notes, .quotes { grid-template-columns: 1fr; }
+  .portrait { max-width: 260px; }
+  .block .wrap { padding-block: 72px; }
+}
+@media (max-width: 560px) {
+  .steps, .row, .news form { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .card, .arrow, .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="note" role="note"><div class="wrap"><strong>Preview.</strong> Highlighted text is a placeholder waiting on your real details.</div></div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="North Sequoia home">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <circle cx="13" cy="13" r="12" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <circle cx="13" cy="13" r="7.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <path d="M13 1.5 L15.6 13 H10.4 Z" fill="currentColor"/>
+      </svg>
+      North Sequoia
+    </a>
+    <nav class="primary" aria-label="Main">
+      <a href="#services">services</a>
+      <a href="#process">how it works</a>
+      <a href="#pricing">pricing</a>
+      <a href="#about">about</a>
+      <a href="#notes">field notes</a>
+      <a class="btn btn-solid" href="#contact">Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="label">Bookkeeping · Consulting · Scaling strategy</p>
+        <h1 style="margin-top:20px">We help small businesses grow <span class="soft">one steady ring at a time.</span></h1>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#contact">Book a free call <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn-line" href="#services">Our services</a>
+        </div>
+      </div>
+      <div class="hero-side">
+        <div class="rings" aria-hidden="true"><canvas id="rings"></canvas></div>
+        <p class="hero-sub">Accurate books every month, and a clear plan for what comes next.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip" aria-label="At a glance">
+    <div class="wrap">
+      <span>Books closed by the 10th</span>
+      <span>Flat monthly fees</span>
+      <span>QuickBooks Online · Xero</span>
+      <span>Fully remote</span>
+    </div>
+  </div>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="label">Services</p><h2 style="margin-top:12px">From the first ledger to the next location.</h2></div>
+        <p>Start with the books, add advice when you need it, or bring us in for a growth plan. Most clients begin with bookkeeping and grow from there.</p>
+      </div>
+      <div class="index">
+        <div class="svc">
+          <p class="label">The foundation</p>
+          <div><h3>Bookkeeping</h3><p style="margin-top:12px">Accurate, current books you can trust at tax time and every month in between.</p></div>
+          <ul><li>Monthly reconciliation and close</li><li>Profit and loss, balance sheet, cash flow</li><li>Catch-up and clean-up of past months</li><li>Payables, receivables, payroll support</li></ul>
+        </div>
+        <div class="svc">
+          <p class="label">The guidance</p>
+          <div><h3>Consulting</h3><p style="margin-top:12px">A financial partner who explains what the numbers mean and helps you act on them.</p></div>
+          <ul><li>Budgets, forecasts, and cash planning</li><li>Pricing and margin reviews</li><li>Accounting software setup</li><li>Quarterly review meetings</li></ul>
+        </div>
+        <div class="svc">
+          <p class="label">The next stage</p>
+          <div><h3>Scaling strategy</h3><p style="margin-top:12px">A practical plan for hiring, a new location, or a new revenue line, modeled before you commit.</p></div>
+          <ul><li>Growth roadmap with milestones</li><li>Unit economics and break-even</li><li>Hiring and capacity planning</li><li>KPI dashboards you will use</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block dark" id="fit">
+    <div class="wrap">
+      <div class="month">
+        <article class="ledger" aria-label="Example monthly close report">
+          <div class="ledger-top"><h3>Monthly close, March</h3><span class="label">Example</span></div>
+          <table>
+            <tbody>
+              <tr><td>Revenue</td><td>$84,250.00</td></tr>
+              <tr><td>Cost of goods sold</td><td class="neg">($31,870.00)</td></tr>
+              <tr><td>Operating expenses</td><td class="neg">($36,410.00)</td></tr>
+              <tr><td>Gross margin</td><td>62.2%</td></tr>
+              <tr class="total"><td>Net income</td><td>$15,970.00</td></tr>
+            </tbody>
+          </table>
+          <div class="done"><span>Accounts reconciled</span><span>Receivables reviewed</span><span>Delivered by the 10th</span></div>
+        </article>
+        <div style="display:grid;gap:28px;min-width:0">
+          <div><p class="label">Is this you?</p><h2 style="margin-top:12px;font-size:var(--s-xl)">Built for owners who are ready to stop guessing.</h2></div>
+          <div class="fit">
+            <div><h3>Your books are months behind.</h3><p class="muted">We catch you up and keep you current from then on.</p></div>
+            <div><h3>You're profitable on paper but short on cash.</h3><p class="muted">We trace where the money goes and build a weekly cash plan.</p></div>
+            <div><h3>You're ready to hire or expand.</h3><p class="muted">We model the cost first, so growth pays for itself.</p></div>
+            <div><h3>You want one advisor who knows your business.</h3><p class="muted">You work with the same person every month.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="process">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="label">How it works</p><h2 style="margin-top:12px">From first call to a steady monthly rhythm.</h2></div>
+        <p>Every engagement follows the same four steps, so you always know what happens next.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="when">Week 1</span><h3>Intro call</h3><p>A free 30-minute conversation about your business, your books, and your goals.</p></li>
+        <li><span class="when">Weeks 2–3</span><h3>Review and clean-up</h3><p>We fix past errors and set up a chart of accounts that fits how you operate.</p></li>
+        <li><span class="when">Every month</span><h3>Monthly close</h3><p>Reconciled books and clear reports in your inbox by the 10th.</p></li>
+        <li><span class="when">Every quarter</span><h3>Strategy review</h3><p>We look at trends, update your forecast, and plan the next quarter.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="pricing" style="padding-top:0">
+    <div class="wrap" style="padding-top:0">
+      <div class="head">
+        <div><p class="label">Pricing</p><h2 style="margin-top:12px">Flat monthly fees. No surprise invoices.</h2></div>
+        <p>Every engagement starts with a free call and a written quote.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <p class="label">Bookkeeping</p>
+          <h3>Essentials</h3>
+          <p class="price"><span class="ph">$000</span> <small>/ month</small></p>
+          <p>Monthly books for businesses with straightforward finances.</p>
+          <ul><li>Up to <span class="ph">2</span> bank and card accounts</li><li>Monthly reconciliation</li><li>P&amp;L and balance sheet</li><li>Email support</li></ul>
+          <a class="btn btn-line" href="#contact">Get a quote</a>
+        </div>
+        <div class="plan featured">
+          <p class="label">Most popular</p>
+          <h3>Growth</h3>
+          <p class="price"><span class="ph">$000</span> <small>/ month</small></p>
+          <p>Bookkeeping plus regular advice for owners making bigger decisions.</p>
+          <ul><li>Everything in Essentials</li><li>Cash flow forecast</li><li>Quarterly strategy review</li><li>Priority support</li></ul>
+          <a class="btn btn-solid" href="#contact" style="background:var(--brass-bright);color:#131A2A">Get a quote</a>
+        </div>
+        <div class="plan">
+          <p class="label">Strategy</p>
+          <h3>Scale</h3>
+          <p class="price"><span class="ph">Custom</span> <small>project or retainer</small></p>
+          <p>A full growth plan for businesses preparing to expand.</p>
+          <ul><li>Everything in Growth</li><li>Growth roadmap and KPIs</li><li>Hiring and expansion modeling</li><li>Monthly advisory meeting</li></ul>
+          <a class="btn btn-line" href="#contact">Get a quote</a>
+        </div>
+      </div>
+      <p class="fine">Catch-up bookkeeping is quoted separately, based on how many months need work.</p>
+    </div>
+  </section>
+
+  <section class="block dark" id="clients">
+    <div class="wrap">
+      <div class="head">
+        <div><p class="label">Clients</p><h2 style="margin-top:12px">What owners say.</h2></div>
+      </div>
+      <div class="quotes">
+        <figure>
+          <blockquote><span class="ph">A short quote from a real client goes here, about what changed once their books were in order.</span></blockquote>
+          <figcaption><span class="ph">Client name, business type</span></figcaption>
+        </figure>
+        <figure>
+          <blockquote><span class="ph">A second client quote goes here, ideally about a growth decision you helped them make.</span></blockquote>
+          <figcaption><span class="ph">Client name, business type</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="person">
+        <div class="portrait">Your headshot goes here</div>
+        <div class="person-copy">
+          <p class="label">About</p>
+          <h2><span class="ph">Anthony Lastname</span></h2>
+          <p class="role">Founder · Bookkeeper and advisor</p>
+          <p><span class="ph">A short bio goes here: your background, years in bookkeeping and finance, and the kinds of businesses you have helped.</span></p>
+          <p>The firm is named for the sequoia because strong businesses grow the way those trees do: one steady ring a year, on roots that hold.</p>
+          <div class="chips"><span class="ph">Certification</span><span class="ph">QuickBooks ProAdvisor</span><span class="ph">Years in practice</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="notes" style="padding-top:0">
+    <div class="wrap" style="padding-top:0">
+      <div class="head">
+        <div><p class="label">Field notes</p><h2 style="margin-top:12px">Plain-English guides for owners.</h2></div>
+        <p>Short reads on keeping clean books and growing on purpose. New guides are on the way.</p>
+      </div>
+      <div class="notes">
+        <a class="card" href="#contact"><div class="meta"><span>Guide</span><span>Coming soon</span></div><h3>Cash or accrual: which method fits your business?</h3><span class="go">Read <span class="arrow" aria-hidden="true">→</span></span></a>
+        <a class="card" href="#contact"><div class="meta"><span>Checklist</span><span>Coming soon</span></div><h3>The 10-minute monthly review every owner should do</h3><span class="go">Read <span class="arrow" aria-hidden="true">→</span></span></a>
+        <a class="card" href="#contact"><div class="meta"><span>Strategy</span><span>Coming soon</span></div><h3>Can you afford your next hire? How to run the numbers</h3><span class="go">Read <span class="arrow" aria-hidden="true">→</span></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="faq" style="padding-top:0">
+    <div class="wrap" style="padding-top:0">
+      <div class="head"><div><p class="label">Questions</p><h2 style="margin-top:12px">Common questions</h2></div></div>
+      <div class="faq">
+        <details><summary>Do you work with clients outside my area?</summary><p>Yes. Everything runs online through secure document sharing and video calls. <span class="ph">Confirm the states or countries you serve.</span></p></details>
+        <details><summary>Which accounting software do you use?</summary><p>QuickBooks Online and Xero. If you use something else, we can help you move over or work within it.</p></details>
+        <details><summary>Do you file taxes?</summary><p><span class="ph">Answer to confirm.</span> If tax filing is not included, we prepare tax-ready books and coordinate directly with your CPA.</p></details>
+        <details><summary>How long is the commitment?</summary><p>Monthly plans run month to month. Strategy projects are scoped and priced up front.</p></details>
+        <details><summary>What if my books are a mess?</summary><p>That's a common starting point. We review where things stand and quote a one-time clean-up before monthly service begins.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="block dark" id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <div class="contact-info">
+          <p class="label">Get in touch</p>
+          <h2>Book a free 30-minute call.</h2>
+          <p class="muted">Tell us about your business and we'll reply within one business day.</p>
+          <dl class="lines">
+            <div><dt>Email</dt><dd><span class="ph">hello@northsequoia.com</span></dd></div>
+            <div><dt>Phone</dt><dd><span class="ph">(555) 010-0100</span></dd></div>
+            <div><dt>Hours</dt><dd><span class="ph">Mon–Fri, 9am–5pm PT</span></dd></div>
+          </dl>
+        </div>
+        <form id="inquiry" novalidate>
+          <div class="row">
+            <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name"></div>
+            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+          </div>
+          <div class="row">
+            <div class="field"><label for="f-business">Business</label><input id="f-business" name="business" autocomplete="organization"></div>
+            <div class="field"><label for="f-interest">Interested in</label>
+              <select id="f-interest" name="interest"><option>Bookkeeping</option><option>Consulting</option><option>Scaling strategy</option><option>Not sure yet</option></select>
+            </div>
+          </div>
+          <div class="field"><label for="f-message">What's going on in your business?</label><textarea id="f-message" name="message"></textarea></div>
+          <button class="btn btn-solid" type="submit" style="justify-self:start">Send message <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="status" id="inquiry-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <div class="news">
+        <div><p class="label">Newsletter</p><h3 style="margin-top:10px">One useful money tip for owners, once a month.</h3></div>
+        <form id="newsletter" novalidate>
+          <div class="field"><label for="n-email">Email</label><input id="n-email" type="email" autocomplete="email"></div>
+          <button class="btn btn-solid" type="submit">Subscribe</button>
+          <p class="status" id="news-status" role="status" aria-live="polite" style="grid-column:1/-1"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© <span id="year">2026</span> North Sequoia · northsequoia.com</span>
+    <button class="motion-toggle" id="motion" type="button" aria-pressed="true">Motion on</button>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.getElementById('year').textContent = new Date().getFullYear();
+  var emailOk = function (v) { return /^\S+@\S+\.\S+$/.test(v); };
+  document.getElementById('inquiry').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var s = document.getElementById('inquiry-status');
+    var n = document.getElementById('f-name').value.trim();
+    if (!n || !emailOk(document.getElementById('f-email').value.trim())) { s.textContent = 'Please add your name and a valid email address.'; return; }
+    s.textContent = 'Thanks, ' + n + '. This is a preview, so the form is not connected yet and nothing was sent.';
+  });
+  document.getElementById('newsletter').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var s = document.getElementById('news-status');
+    s.textContent = emailOk(document.getElementById('n-email').value.trim()) ? 'Preview only: signups are not connected yet.' : 'Please enter a valid email address.';
+  });
+
+  // Growth rings: concentric, slightly irregular rings drawn outward like a tree's cross-section.
+  var canvas = document.getElementById('rings'), ctx = canvas.getContext('2d');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionOn = !reduce, btn = document.getElementById('motion');
+  try { if (localStorage.getItem('ns-motion') === 'off') motionOn = false; } catch (e) {}
+  var RINGS = 14, seeds = [];
+  for (var i = 0; i < RINGS; i++) seeds.push([Math.random() * 6.28, Math.random() * 6.28, 0.6 + Math.random() * 0.8]);
+  var start = performance.now(), raf;
+  function color(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function draw(now) {
+    var dpr = window.devicePixelRatio || 1, w = canvas.clientWidth, h = canvas.clientHeight;
+    if (canvas.width !== w * dpr) { canvas.width = w * dpr; canvas.height = h * dpr; }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+    var t = motionOn ? (now - start) / 1000 : 99, cx = w * 0.5, cy = h * 0.52, max = Math.min(w, h) * 0.47;
+    var ringCol = color('--ring'), accent = color('--brass');
+    for (var r = 0; r < RINGS; r++) {
+      var grow = Math.min(1, Math.max(0, (t - r * 0.18) / 0.9));
+      if (grow <= 0) continue;
+      var base = max * Math.pow((r + 1) / RINGS, 0.85) * (0.6 + 0.4 * grow), s = seeds[r];
+      ctx.beginPath();
+      for (var a = 0; a <= 6.30; a += 0.05) {
+        var wob = 1 + 0.018 * s[2] * Math.sin(a * 3 + s[0] + t * 0.15) + 0.012 * Math.sin(a * 5 + s[1]);
+        var x = cx + Math.cos(a) * base * wob * 1.02, y = cy + Math.sin(a) * base * wob;
+        a === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      var latest = r === RINGS - 1;
+      ctx.strokeStyle = latest ? accent : ringCol; ctx.lineWidth = latest ? 1.6 : 1; ctx.globalAlpha = grow; ctx.stroke(); ctx.globalAlpha = 1;
+    }
+    ctx.fillStyle = accent; ctx.beginPath(); ctx.arc(cx, cy, 3, 0, 6.29); ctx.fill();
+    if (motionOn) raf = requestAnimationFrame(draw);
+  }
+  function setMotion(on) {
+    motionOn = on; btn.textContent = on ? 'Motion on' : 'Motion off'; btn.setAttribute('aria-pressed', on);
+    try { localStorage.setItem('ns-motion', on ? 'on' : 'off'); } catch (e) {}
+    cancelAnimationFrame(raf); raf = requestAnimationFrame(draw);
+  }
+  btn.addEventListener('click', function () { setMotion(!motionOn); });
+  btn.textContent = motionOn ? 'Motion on' : 'Motion off'; btn.setAttribute('aria-pressed', motionOn);
+  window.addEventListener('resize', function () { if (!motionOn) requestAnimationFrame(draw); });
+  raf = requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
