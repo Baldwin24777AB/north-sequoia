@@ -278,7 +278,7 @@ footer.site img { height: 22px; width: auto; }
             <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
           </div>
           <div class="field"><label for="f-message">Message <span style="font-weight:400;color:var(--muted)">(optional)</span></label><textarea id="f-message" name="message"></textarea></div>
-          <button class="btn" type="submit" style="justify-self:start">Send message</button>
+          <button class="btn" type="submit" style="justify-self:start">Email me</button>
           <p class="status" id="status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -306,7 +306,11 @@ footer.site img { height: 22px; width: auto; }
     var n = document.getElementById('f-name').value.trim();
     var m = document.getElementById('f-email').value.trim();
     if (!n || !/^\S+@\S+\.\S+$/.test(m)) { s.textContent = 'Please add your name and a valid email address.'; return; }
-    s.textContent = 'Thanks, ' + n + '. This is a preview, so the form is not connected yet and nothing was sent.';
+    var service = document.querySelector('input[name="service"]:checked').value;
+    var msg = document.getElementById('f-message').value.trim();
+    var body = 'Name: ' + n + '\nEmail: ' + m + '\nService: ' + service + (msg ? '\n\n' + msg : '');
+    window.location.href = 'mailto:Baldwin24777@gmail.com?subject=' + encodeURIComponent('North Sequoia inquiry: ' + service) + '&body=' + encodeURIComponent(body);
+    s.textContent = 'Your email app should open with your message ready to send. If it doesn\'t, email Baldwin24777@gmail.com directly.';
   });
 })();
 </script>
