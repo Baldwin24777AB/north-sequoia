@@ -330,8 +330,9 @@ footer.site img { height: 22px; width: auto; }
           </fieldset>
           <div class="row">
             <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name"></div>
-            <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+            <div class="field"><label for="f-phone">Phone <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="f-phone" name="phone" type="tel" autocomplete="tel"></div>
           </div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
           <div class="field"><label for="f-message">Message <span style="font-weight:400;color:var(--muted)">(optional)</span></label><textarea id="f-message" name="message"></textarea></div>
           <button class="btn" type="submit" style="justify-self:start">Email me</button>
           <input type="checkbox" name="botcheck" id="f-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
@@ -375,6 +376,7 @@ footer.site img { height: 22px; width: auto; }
     var s = document.getElementById('status');
     var n = document.getElementById('f-name').value.trim();
     var m = document.getElementById('f-email').value.trim();
+    var ph = document.getElementById('f-phone').value.trim();
     if (!n || !/^\S+@\S+\.\S+$/.test(m)) { s.textContent = 'Please add your name and a valid email address.'; return; }
     var service = document.querySelector('input[name="service"]:checked').value;
     var msg = document.getElementById('f-message').value.trim();
@@ -390,6 +392,7 @@ footer.site img { height: 22px; width: auto; }
         from_name: 'North Sequoia website',
         replyto: m,
         name: n,
+        phone: ph || '(not given)',
         email: m,
         service: service,
         message: msg || '(no message)',
