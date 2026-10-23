@@ -104,8 +104,8 @@ section { scroll-margin-top: 80px; }
 .sec .wrap { padding-block: 72px; }
 /* divider lines: drawn as a background so they can roll out left to right */
 .sec .wrap, footer.site .wrap { border-top: 3px solid transparent; background: linear-gradient(var(--nav), var(--nav)) left top / 100% 3px no-repeat border-box; }
-.roll .sec .wrap, .roll footer.site .wrap { transition: background-size 1.4s cubic-bezier(.65, 0, .35, 1); }
-.roll .sec .wrap:not(.in), .roll footer.site .wrap:not(.in) { background-size: 0% 3px; }
+.roll .sec:not(#services) .wrap, .roll footer.site .wrap { transition: background-size 1.4s cubic-bezier(.65, 0, .35, 1); }
+.roll .sec:not(#services) .wrap:not(.in), .roll footer.site .wrap:not(.in) { background-size: 0% 3px; }
 .sec h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; margin-top: 10px; }
 .sec .intro { color: var(--muted); max-width: 52ch; margin-top: 12px; }
 
@@ -338,13 +338,13 @@ footer.site img { height: 22px; width: auto; }
   function toTop() { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); }
   toTop();
   window.addEventListener('load', toTop);
-  // Roll each divider line out from the left as it scrolls into view.
+  // Roll each divider line (except the top one) out from the left as it scrolls into view.
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.classList.add('roll');
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.sec .wrap, footer.site .wrap').forEach(function (w) { io.observe(w); });
+    document.querySelectorAll('.sec:not(#services) .wrap, footer.site .wrap').forEach(function (w) { io.observe(w); });
   }
   document.getElementById('year').textContent = new Date().getFullYear();
   document.querySelectorAll('[data-service]').forEach(function (a) {
