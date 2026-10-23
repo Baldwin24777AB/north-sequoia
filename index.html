@@ -275,6 +275,22 @@ footer.site img { height: 22px; width: auto; }
 .plane { position: fixed; left: 0; top: 0; width: 58px; height: 58px; z-index: 1000; pointer-events: none; offset-anchor: center; offset-rotate: auto; filter: drop-shadow(0 6px 8px rgba(24, 58, 40, .3)); }
 .trail { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 999; pointer-events: none; overflow: visible; }
 @media (prefers-reduced-motion: reduce) { #inquiry .sent > *, #inquiry .check circle, #inquiry .check path { animation: none; stroke-dashoffset: 0; } }
+
+/* Booking popup */
+#book { width: min(1000px, calc(100vw - 32px)); height: min(720px, calc(100dvh - 32px)); max-width: none; max-height: none; padding: 0; border: 0; border-radius: 14px; background: var(--bg); color: var(--ink); overflow: hidden; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .45); }
+#book[open] { display: grid; grid-template-rows: auto 1fr; animation: book-in .3s cubic-bezier(.2, .7, .3, 1); }
+#book::backdrop { background: rgba(16, 28, 21, .6); backdrop-filter: blur(3px); }
+#book .book-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 12px 12px 22px; background: #1E5A32; color: #fff; }
+#book .book-bar h2 { margin: 0; font: 800 1.05rem var(--font-head); color: #fff; }
+#book .book-tab { margin-left: auto; font: 700 0.85rem var(--font-head); color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+#book .book-tab:focus-visible { outline: 3px solid #9FD39A; outline-offset: 2px; }
+#book .book-close { width: 38px; height: 38px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .6); background: transparent; color: #fff; font: 700 1.3rem/1 var(--font-head); cursor: pointer; display: grid; place-items: center; }
+#book .book-close:hover { background: #fff; color: #1E5A32; }
+#book .book-close:focus-visible { outline: 3px solid #9FD39A; outline-offset: 2px; }
+#book iframe { width: 100%; height: 100%; border: 0; background: #fff; }
+@keyframes book-in { from { opacity: 0; transform: translateY(16px) scale(.98); } }
+@media (max-width: 600px) { #book { width: 100vw; height: 100dvh; border-radius: 0; } }
+@media (prefers-reduced-motion: reduce) { #book[open] { animation: none; } }
 </style>
 </head>
 <body>
@@ -300,7 +316,7 @@ footer.site img { height: 22px; width: auto; }
         <h1>Clear Books. Smart Advice. Room to grow.</h1>
         <p>Bookkeeping, Consulting, and Growth Strategy for Small Business Owners.</p>
         <div class="actions">
-          <a class="btn" href="#contact">Book a free call</a>
+          <a class="btn" href="https://calendly.com/northsequoia/30min" target="_blank" rel="noopener" data-book>Book a free call</a>
           <a class="link" href="#services">See services</a>
         </div>
       </div>
@@ -423,6 +439,11 @@ footer.site img { height: 22px; width: auto; }
   </section>
 </main>
 
+<dialog id="book" aria-labelledby="book-title">
+  <div class="book-bar"><h2 id="book-title">Book a free call</h2><a class="book-tab" href="https://calendly.com/northsequoia/30min" target="_blank" rel="noopener">Open in new tab ↗</a><button type="button" class="book-close" aria-label="Close">×</button></div>
+  <iframe title="Pick a time for your free call" loading="lazy"></iframe>
+</dialog>
+
 <footer class="site">
   <div class="wrap">
     <img class="on-light" src="assets/logo.png" alt="North Sequoia">
@@ -504,6 +525,20 @@ footer.site img { height: 22px; width: auto; }
     f.classList.remove('done'); f.style.minHeight = '';
     document.getElementById('f-name').focus();
   });
+  // "Book a free call" opens the Calendly calendar in a popup; without dialog support the link opens Calendly in a new tab.
+  var book = document.getElementById('book');
+  if (book && book.showModal) {
+    document.querySelectorAll('[data-book]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var f = book.querySelector('iframe');
+        if (!f.src) f.src = a.href + '?embed_domain=northsequoia.com&embed_type=Inline&hide_gdpr_banner=1&primary_color=228b22&background_color=ffffff&text_color=183a28';
+        book.showModal();
+      });
+    });
+    book.querySelector('.book-close').addEventListener('click', function () { book.close(); });
+    book.addEventListener('click', function (e) { if (e.target === book) book.close(); });
+  }
   document.getElementById('inquiry').addEventListener('submit', function (e) {
     e.preventDefault();
     var s = document.getElementById('status');
