@@ -253,6 +253,26 @@ footer.site img { height: 22px; width: auto; }
 #inquiry .choices input:focus-visible + label { outline-color: #9FD39A; }
 #inquiry .btn { background: #fff; color: #183A28; }
 #inquiry .btn:hover { background: #E3F1DF; }
+
+/* Sent animation: fold, paper plane, thank-you panel */
+#inquiry .sent { display: none; }
+#inquiry.done { align-content: center; }
+#inquiry.done > :not(.sent) { display: none; }
+#inquiry.done .sent { display: grid; justify-items: center; text-align: center; gap: 10px; padding: 12px 0; }
+#inquiry .sent > * { animation: sent-up .5s cubic-bezier(.2, .7, .3, 1) both; }
+#inquiry .sent h3 { margin: 0; font: 800 1.6rem/1.2 var(--font-head); color: #fff; outline: none; animation-delay: .35s; }
+#inquiry .sent p { margin: 0; color: #fff; font-size: 1rem; max-width: 36ch; animation-delay: .45s; }
+#inquiry .sent .again { margin-top: 8px; font: 700 0.9rem var(--font-head); color: #fff; background: transparent; border: 2px solid #fff; border-radius: 999px; padding: 9px 18px; cursor: pointer; animation-delay: .55s; transition: background .15s ease, color .15s ease; }
+#inquiry .sent .again:hover { background: #fff; color: #1E5A32; }
+#inquiry .sent .again:focus-visible { outline: 3px solid #9FD39A; outline-offset: 3px; }
+#inquiry .check { width: 68px; height: 68px; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+#inquiry .check circle { stroke: #9FD39A; stroke-width: 3; stroke-dasharray: 151; stroke-dashoffset: 151; animation: draw .6s ease-out .05s forwards; }
+#inquiry .check path { stroke: #fff; stroke-width: 4; stroke-dasharray: 40; stroke-dashoffset: 40; animation: draw .35s ease-out .55s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes sent-up { from { opacity: 0; transform: translateY(10px); } }
+.plane { position: fixed; left: 0; top: 0; width: 58px; height: 58px; z-index: 1000; pointer-events: none; offset-anchor: center; offset-rotate: auto; filter: drop-shadow(0 6px 8px rgba(24, 58, 40, .3)); }
+.trail { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 999; pointer-events: none; overflow: visible; }
+@media (prefers-reduced-motion: reduce) { #inquiry .sent > *, #inquiry .check circle, #inquiry .check path { animation: none; stroke-dashoffset: 0; } }
 </style>
 </head>
 <body>
@@ -389,6 +409,12 @@ footer.site img { height: 22px; width: auto; }
           <button class="btn" type="submit" style="justify-self:start">Email me</button>
           <input type="checkbox" name="botcheck" id="f-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
           <p class="status" id="status" role="status" aria-live="polite"></p>
+          <div class="sent" aria-live="polite">
+            <svg class="check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
+            <h3 tabindex="-1">Message sent!</h3>
+            <p id="sent-msg"></p>
+            <button type="button" class="again">Send another message</button>
+          </div>
         </form>
       </div>
     </div>
@@ -423,6 +449,59 @@ footer.site img { height: 22px; width: auto; }
   document.querySelectorAll('[data-service]').forEach(function (a) {
     a.addEventListener('click', function () { document.getElementById('s-' + a.dataset.service).checked = true; });
   });
+  // Fold the form into a paper plane, loop it off the screen, then show the thank-you panel.
+  function celebrate(form, n) {
+    var W = innerWidth, fr = form.getBoundingClientRect(), cx = fr.left + fr.width / 2, cy = fr.top + fr.height / 2;
+    var kids = Array.prototype.filter.call(form.children, function (c) { return !c.classList.contains('sent') && c.offsetParent; });
+    var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var canFly = !calm && window.CSS && CSS.supports('offset-path', 'path("M0 0L1 1")') && Element.prototype.animate;
+    form.style.minHeight = fr.height + 'px';
+    function reveal() {
+      kids.forEach(function (c) { c.getAnimations && c.getAnimations().forEach(function (a) { a.cancel(); }); });
+      form.reset();
+      document.getElementById('sent-msg').textContent = 'Thanks, ' + n + '. Your message is on its way to my inbox. I\'ll reply within one business day.';
+      form.classList.add('done');
+      form.querySelector('.sent h3').focus({ preventScroll: true });
+    }
+    if (!canFly) { reveal(); return; }
+    kids.forEach(function (c, i) {
+      var r = c.getBoundingClientRect();
+      c.animate([{ transform: 'none', opacity: 1 }, { transform: 'translate(' + (cx - r.left - r.width / 2) + 'px,' + (cy - r.top - r.height / 2) + 'px) scale(.12)', opacity: 0 }],
+        { duration: 520, delay: i * 45, easing: 'cubic-bezier(.55,0,.75,.2)', fill: 'forwards' });
+    });
+    var k = Math.min(110, W * 0.24), ey = Math.min(cy - k * 2.6, 60) - 160;
+    var d = 'M' + cx + ' ' + cy +
+      ' C' + (cx + k) + ' ' + cy + ' ' + (cx + k * 1.4) + ' ' + (cy - k * 1.2) + ' ' + (cx + k * 0.3) + ' ' + (cy - k * 1.6) +
+      ' C' + (cx - k * 0.9) + ' ' + (cy - k * 1.6) + ' ' + (cx - k * 1.1) + ' ' + (cy - k * 0.6) + ' ' + (cx - k * 0.2) + ' ' + (cy - k * 0.55) +
+      ' C' + (cx + k * 0.8) + ' ' + (cy - k * 0.5) + ' ' + (W * 0.85) + ' ' + (ey + (cy - ey) * 0.4) + ' ' + (W + 120) + ' ' + ey;
+    var ns = 'http://www.w3.org/2000/svg';
+    var trail = document.createElementNS(ns, 'svg');
+    trail.setAttribute('class', 'trail'); trail.setAttribute('aria-hidden', 'true');
+    trail.innerHTML = '<defs><mask id="trail-mask" maskUnits="userSpaceOnUse"><path d="' + d + '" fill="none" stroke="#fff" stroke-width="8"/></mask></defs>' +
+      '<path d="' + d + '" fill="none" stroke="#5FD35F" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9" mask="url(#trail-mask)"/>';
+    var plane = document.createElementNS(ns, 'svg');
+    plane.setAttribute('class', 'plane'); plane.setAttribute('viewBox', '0 0 64 64'); plane.setAttribute('aria-hidden', 'true');
+    plane.innerHTML = '<path d="M4 14L60 32L4 50L16 32Z" fill="#fff" stroke="#1E5A32" stroke-width="2.5" stroke-linejoin="round"/><path d="M16 32L60 32L22 44Z" fill="#E3F1DF" stroke="#1E5A32" stroke-width="2.5" stroke-linejoin="round"/>';
+    plane.style.offsetPath = 'path("' + d + '")';
+    setTimeout(function () {
+      document.body.appendChild(trail); document.body.appendChild(plane);
+      var reveal_ = trail.querySelector('mask path'), len = reveal_.getTotalLength();
+      reveal_.style.strokeDasharray = len; reveal_.style.strokeDashoffset = len;
+      var flight = { duration: 1500, delay: 280, easing: 'cubic-bezier(.45,0,.55,1)', fill: 'both' };
+      plane.animate([{ transform: 'scale(0)' }, { transform: 'scale(1.15)', offset: .7 }, { transform: 'scale(1)' }], { duration: 300, easing: 'ease-out', fill: 'both' });
+      plane.animate([{ offsetDistance: '0%' }, { offsetDistance: '100%' }], flight);
+      reveal_.animate([{ strokeDashoffset: len }, { strokeDashoffset: 0 }], flight).onfinish = function () {
+        plane.remove();
+        trail.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: 'forwards' }).onfinish = function () { trail.remove(); };
+      };
+      setTimeout(reveal, 1350);
+    }, 560);
+  }
+  document.querySelector('#inquiry .again').addEventListener('click', function () {
+    var f = document.getElementById('inquiry');
+    f.classList.remove('done'); f.style.minHeight = '';
+    document.getElementById('f-name').focus();
+  });
   document.getElementById('inquiry').addEventListener('submit', function (e) {
     e.preventDefault();
     var s = document.getElementById('status');
@@ -452,8 +531,7 @@ footer.site img { height: 22px; width: auto; }
       })
     }).then(function (r) { return r.json(); }).then(function (res) {
       if (!res.success) throw new Error(res.message);
-      form.reset();
-      s.textContent = 'Thanks, ' + n + '! Your message was sent. I\'ll reply within one business day.';
+      celebrate(form, n);
     }).catch(function () {
       s.textContent = 'Sorry, your message didn\'t go through. Please try again, or email NorthSequoia@outlook.com directly.';
     }).then(function () { btn.disabled = false; btn.textContent = label; });
