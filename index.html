@@ -334,6 +334,7 @@ footer.site img { height: 22px; width: auto; }
           </div>
           <div class="field"><label for="f-message">Message <span style="font-weight:400;color:var(--muted)">(optional)</span></label><textarea id="f-message" name="message"></textarea></div>
           <button class="btn" type="submit" style="justify-self:start">Email me</button>
+          <input type="checkbox" name="botcheck" id="f-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none">
           <p class="status" id="status" role="status" aria-live="polite"></p>
         </form>
       </div>
@@ -377,9 +378,30 @@ footer.site img { height: 22px; width: auto; }
     if (!n || !/^\S+@\S+\.\S+$/.test(m)) { s.textContent = 'Please add your name and a valid email address.'; return; }
     var service = document.querySelector('input[name="service"]:checked').value;
     var msg = document.getElementById('f-message').value.trim();
-    var body = 'Name: ' + n + '\nEmail: ' + m + '\nService: ' + service + (msg ? '\n\n' + msg : '');
-    window.location.href = 'mailto:NorthSequoia@outlook.com?subject=' + encodeURIComponent('North Sequoia inquiry: ' + service) + '&body=' + encodeURIComponent(body);
-    s.textContent = 'Your email app should open with your message ready to send. If it doesn\'t, email NorthSequoia@outlook.com directly.';
+    var form = this, btn = form.querySelector('button[type="submit"]'), label = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Sending…'; s.textContent = '';
+    // Web3Forms delivers the message to NorthSequoia@outlook.com; the access key is public by design.
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: '150e85d5-bf9a-454e-b9e0-e7d2f771ef0d',
+        subject: 'North Sequoia inquiry: ' + service,
+        from_name: 'North Sequoia website',
+        replyto: m,
+        name: n,
+        email: m,
+        service: service,
+        message: msg || '(no message)',
+        botcheck: document.getElementById('f-botcheck').checked
+      })
+    }).then(function (r) { return r.json(); }).then(function (res) {
+      if (!res.success) throw new Error(res.message);
+      form.reset();
+      s.textContent = 'Thanks, ' + n + '! Your message was sent. I\'ll reply within one business day.';
+    }).catch(function () {
+      s.textContent = 'Sorry, your message didn\'t go through. Please try again, or email NorthSequoia@outlook.com directly.';
+    }).then(function () { btn.disabled = false; btn.textContent = label; });
   });
 })();
 </script>
