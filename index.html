@@ -111,7 +111,7 @@ section { scroll-margin-top: 80px; }
 
 /* services */
 .services { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; display: grid; grid-template-columns: 1fr 1.2fr 210px; grid-template-areas: "title list link" "desc list link"; column-gap: 40px; row-gap: 6px; align-items: center; min-width: 0; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; display: grid; grid-template-columns: 1fr 1.2fr 240px; grid-template-areas: "title list link" "desc list link"; column-gap: 40px; row-gap: 6px; align-items: center; min-width: 0; }
 .card h3 { grid-area: title; align-self: end; font-size: 1.3rem; font-weight: 700; }
 .card .who { grid-area: desc; align-self: start; font-size: 0.95rem; color: var(--muted); }
 .card ul { grid-area: list; list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
@@ -119,11 +119,17 @@ section { scroll-margin-top: 80px; }
 .card li { padding-left: 22px; position: relative; }
 .card li::before { content: ""; position: absolute; left: 2px; top: 0.6em; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); opacity: 0.8; }
 /* green service cards */
-.card { background: #228B22; border-color: #228B22; color: #fff; align-content: center; }
+.card { background: #1E5A32; border-color: #1E5A32; color: #fff; align-content: center; transition: transform .2s ease, box-shadow .2s ease; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 14px 28px -14px rgba(24, 58, 40, .45); }
+.card h3 { display: flex; align-items: center; gap: 12px; }
+.card .ico { width: 30px; height: 30px; flex: none; color: #9FD39A; }
+.card > .link { padding: 10px 18px; border-radius: 999px; border: 2px solid currentColor; transition: background .15s ease, color .15s ease; }
+.card > .link:hover { background: #fff; color: #1E5A32; text-decoration: none; }
+@media (prefers-reduced-motion: reduce) { .card, .card:hover { transition: none; transform: none; } }
 .services { grid-auto-rows: 1fr; }
 .card h3, .card li, .card > .link { color: #fff; }
-.card .who { color: #F1F5EC; }
-.card li::before { background: #fff; opacity: 1; }
+.card .who { color: #DCEADF; }
+.card li::before { background: #9FD39A; opacity: 1; }
 
 /* steps */
 .steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; counter-reset: s; }
@@ -228,7 +234,7 @@ footer.site img { height: 22px; width: auto; }
       <h2>Three ways I can help</h2>
       <div class="services">
         <article class="card">
-          <h3>Bookkeeping</h3>
+          <h3><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>Bookkeeping</h3>
           <p class="who">Accurate, up-to-date books every month.</p>
           <ul>
             <li>Monthly Reconciliation</li>
@@ -238,7 +244,7 @@ footer.site img { height: 22px; width: auto; }
           <a class="link" href="#contact" data-service="bookkeeping">Ask about bookkeeping →</a>
         </article>
         <article class="card">
-          <h3>Consulting</h3>
+          <h3><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9.5h8M8 12.5h5"/></svg>Consulting</h3>
           <p class="who">Straight answers about your numbers.</p>
           <ul>
             <li>Budgets and Cash Flow Plans</li>
@@ -248,7 +254,7 @@ footer.site img { height: 22px; width: auto; }
           <a class="link" href="#contact" data-service="consulting">Ask about consulting →</a>
         </article>
         <article class="card">
-          <h3>Scaling strategy</h3>
+          <h3><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18"/><path d="M5 16l5-5 3 3 6-7"/><path d="M15 7h4v4"/></svg>Scaling strategy</h3>
           <p class="who">A clear plan for your next stage of growth.</p>
           <ul>
             <li>Growth Roadmap and Goals</li>
