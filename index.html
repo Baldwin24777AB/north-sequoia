@@ -206,6 +206,24 @@ footer.site img { height: 22px; width: auto; }
   .sec .wrap { padding-block: 56px; }
 }
 @media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+
+/* Dark message box */
+#inquiry { background: #222324; border-color: #222324; color: #fff; padding: 32px; box-shadow: 0 18px 36px -22px rgba(0, 0, 0, .55); }
+#inquiry .form-head { display: grid; justify-items: center; gap: 6px; text-align: center; margin-bottom: 6px; }
+#inquiry .form-head svg { width: 64px; height: 64px; color: #2DB82D; }
+#inquiry .form-head h3 { margin: 0; font: 800 1.85rem/1.2 var(--font-head); color: #fff; letter-spacing: 0.01em; }
+#inquiry .form-head p { margin: 0; color: #fff; font-size: 1.05rem; font-weight: 500; }
+#inquiry legend, #inquiry .field label { color: #fff; font: 700 1rem var(--font-head); }
+#inquiry .field label span { color: #D5D9D6 !important; font: 500 0.9rem var(--font-body); }
+#inquiry .field input, #inquiry .field textarea { background: #2D2E30; border-color: #45474A; color: #fff; }
+#inquiry .field input:focus, #inquiry .field textarea:focus { outline: 2px solid #2DB82D; border-color: #2DB82D; }
+#inquiry .choices label { background: transparent; border-color: #8A8D90; color: #fff; font-weight: 600; font-size: 1rem; }
+#inquiry .choices input:checked + label { background: #228B22; border-color: #228B22; color: #fff; }
+#inquiry .choices input:focus-visible + label { outline-color: #2DB82D; }
+#inquiry .btn { background: #228B22; color: #fff; font-size: 1.05rem; font-weight: 800; padding: 14px 26px; }
+#inquiry .btn:hover { background: #2DB82D; }
+#inquiry .btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+#inquiry .status { color: #fff; font-weight: 500; }
 </style>
 </head>
 <body>
@@ -320,6 +338,11 @@ footer.site img { height: 22px; width: auto; }
           </dl>
         </div>
         <form id="inquiry" novalidate>
+          <div class="form-head">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14h44a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4H30l-12 9v-9h-8a4 4 0 0 1-4-4V18a4 4 0 0 1 4-4z"/><path d="M18 26h28M18 34h18"/></svg>
+            <h3>Send a message</h3>
+            <p>It goes straight to my inbox.</p>
+          </div>
           <fieldset>
             <legend>What do you need help with?</legend>
             <div class="choices">
