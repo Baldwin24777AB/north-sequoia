@@ -143,8 +143,15 @@ section { scroll-margin-top: 80px; }
 #about .wrap, #how .wrap { padding-block: 48px; }
 .about-copy h2, #how h2 { font-size: clamp(1.4rem, 2.4vw, 1.75rem); }
 #how .steps { margin-top: 24px; gap: 28px; }
-#how .steps li { gap: 6px; }
-#how .steps li::before { width: 30px; height: 30px; font-size: 0.9rem; }
+#how .steps li { gap: 6px; position: relative; }
+#how .steps li::before { width: 30px; height: 30px; font-size: 0.9rem; position: relative; z-index: 1; background: #228B22; color: #FFFFFF; box-shadow: 0 0 0 6px var(--bg); }
+/* green line joining the steps; rolls out from step 1 to step 3 when the section scrolls into view */
+#how .steps li:not(:last-child)::after { content: ""; position: absolute; top: 14px; left: 30px; right: -28px; height: 2px; background: #228B22; transform-origin: left; }
+.roll #how .wrap:not(.in) .steps li::after { transform: scaleX(0); }
+.roll #how .wrap.in .steps li:not(:last-child)::after { animation: step-roll .9s cubic-bezier(.65, 0, .35, 1) .5s both; }
+.roll #how .wrap.in .steps li:nth-child(2)::after { animation-delay: 1.2s; }
+@keyframes step-roll { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes step-roll-v { from { transform: scaleY(0); } to { transform: scaleY(1); } }
 #how .steps h3 { font-size: 1.05rem; margin-top: 4px; }
 #how .steps p { font-size: 0.97rem; }
 .about-copy p:not(.kicker) { font-size: 0.97rem; }
@@ -189,6 +196,12 @@ footer.site img { height: 22px; width: auto; }
   .about, .contact { grid-template-columns: 1fr; gap: 28px; }
   .portrait { max-width: 130px; }
   #about .wrap, #how .wrap { padding-block: 40px; }
+  #how .steps li { padding-left: 46px; }
+  #how .steps li::before { position: absolute; left: 0; top: 0; }
+  #how .steps h3 { margin-top: 2px; }
+  #how .steps li:not(:last-child)::after { top: 30px; left: 14px; right: auto; bottom: -28px; width: 2px; height: auto; transform-origin: top; }
+  .roll #how .wrap:not(.in) .steps li::after { transform: scaleY(0); }
+  .roll #how .wrap.in .steps li:not(:last-child)::after { animation-name: step-roll-v; }
   .about { gap: 22px; }
   .sec .wrap { padding-block: 56px; }
 }
