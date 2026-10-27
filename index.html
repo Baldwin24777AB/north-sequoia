@@ -10,7 +10,7 @@
 <meta name="description" content="North Sequoia: bookkeeping, consulting, and growth strategy for small businesses.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Oswald:wght@600;700&family=Figtree:wght@400;500;600&display=swap">
 <style>
 /* Layout: one calm column of short sections. Logo in the bar, a plain headline with one action, three service cards, three steps, about, contact. Colors and type taken from the North Sequoia logo. */
 :root {
@@ -310,6 +310,12 @@ footer.site .privacy-open { color: var(--muted); }
 #privacy .privacy-body p { margin: 0; }
 #privacy .privacy-body .updated { font-size: 0.82rem; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { #privacy[open] { animation: none; } }
+
+/* Degree badge, Fresno State themed (red #DB0032, blue #13284C, Oswald as a stand-in for their bold condensed type) */
+.degree { display: inline-flex; align-items: center; gap: 14px; justify-self: start; max-width: 100%; margin: 4px 0 2px; padding: 12px 20px 12px 12px; background: #EAF0F8; border: 1px solid #D2DCEB; border-left: 6px solid #DB0032; border-radius: 12px; }
+.degree svg { flex: none; width: 48px; height: 48px; padding: 11px; border-radius: 50%; background: #13284C; color: #fff; box-shadow: 0 0 0 3px #EAF0F8, 0 0 0 5px #DB0032; }
+.degree b { display: block; font: 700 1.02rem/1.25 "Oswald", var(--font-head); letter-spacing: 0.03em; text-transform: uppercase; color: #13284C; }
+.degree span { display: block; margin-top: 2px; font: 600 0.86rem/1.4 var(--font-body); color: #DB0032; }
 </style>
 </head>
 <body>
@@ -405,6 +411,10 @@ footer.site .privacy-open { color: var(--muted); }
           <h2>Hi, I'm Anthony.</h2>
           <p>~ Over 5 years of experience in Various Accounting Positions that include Casinos, Trucking, Rental Properties, Real Estate, Solar, Farming, and many other Small Businesses!</p>
           <p>Like the Sequoia, the Best Businesses Grow steadily on Strong Roots. My job is to give you those Roots: Clean Numbers and a Clear Plan.</p>
+          <div class="degree">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></svg>
+            <div><b>B.S. Business Administration · Accountancy</b><span>California State University, Fresno · Class of 2018</span></div>
+          </div>
           <a class="link li-link" href="https://www.linkedin.com/in/anthony-baldwin-0954278b" target="_blank" rel="noopener">Connect with me on LinkedIn →</a>
         </div>
       </div>
