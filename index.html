@@ -112,7 +112,10 @@ nav.primary .btn { padding: 10px 18px; }
 .dial .dl { font-size: 11px; font-weight: 700; fill: var(--muted); }
 .hero .tagline { margin: 0 0 10px; }
 @media (prefers-reduced-motion: no-preference) {
-  .dial .needle { transform-origin: 110px 110px; animation: dial-settle 1.6s cubic-bezier(.3, .6, .3, 1) 1.9s both; }
+  .dial .needle { transform-origin: 110px 110px; animation: dial-settle 1.6s cubic-bezier(.3, .6, .3, 1) .3s both; }
+  /* hero tree shows right away; only the header logo keeps the sketch-in */
+  .hero .mark .tree-draw .fill { animation: none; }
+  .hero .mark .tree-draw .ink { display: none; }
 }
 @keyframes dial-settle { 0% { transform: rotate(-38deg); opacity: 0; } 20% { opacity: 1; } 45% { transform: rotate(12deg); } 70% { transform: rotate(-5deg); } 88% { transform: rotate(2deg); } 100% { transform: rotate(0); opacity: 1; } }
 
