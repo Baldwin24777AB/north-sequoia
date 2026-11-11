@@ -132,6 +132,14 @@ header .btn[href="#contact"]:hover { transform: translateY(-1px); }
 @media (prefers-reduced-motion: reduce) { .hero .btn-book, .hero .btn-book .arr, header .btn[href="#contact"] { transition: none; } .hero .btn-book:hover, header .btn[href="#contact"]:hover { transform: none; } }
 .hero p { font-size: 1.05rem; font-weight: 400; color: var(--nav); max-width: 44ch; margin-top: 14px; }
 .hero .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 24px; }
+/* "See my services": soft green underline and a down arrow so it reads as tappable and scrolls down */
+.hero .see-services { display: inline-flex; align-items: center; gap: 6px; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; text-decoration-color: #9FD39A; }
+.hero .see-services svg { width: 16px; height: 16px; flex: none; transition: transform .2s ease; }
+.hero .see-services:hover { text-decoration-color: currentColor; }
+.hero .see-services:hover svg { transform: translateY(3px); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero .see-services { text-decoration-color: #4F8A5E; } }
+:root[data-theme="dark"] .hero .see-services { text-decoration-color: #4F8A5E; }
+@media (prefers-reduced-motion: reduce) { .hero .see-services svg { transition: none; } .hero .see-services:hover svg { transform: none; } }
 .hero .mark { justify-self: center; background: var(--soft); border: 3px solid var(--gray); box-shadow: 0 0 0 6px var(--bg), 0 0 0 7px var(--line); border-radius: 50%; width: 220px; height: 220px; max-width: 100%; aspect-ratio: 1; display: grid; place-items: center; }
 /* hero tree: same pen-sketch draw and timing as the header logo */
 .hero .mark .tree-draw { height: 120px; aspect-ratio: 115 / 240; }
@@ -422,7 +430,7 @@ footer.site .privacy-open { color: var(--muted); }
             <a class="btn btn-book" href="https://calendly.com/northsequoia/30min" target="_blank" rel="noopener" data-book><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 10h17M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>Book a free call<svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></a>
             <span class="book-note">15 minutes · Free · No obligation</span>
           </span>
-          <a class="link" href="#services">See services</a>
+          <a class="link see-services" href="#services">See my services <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
       </div>
       <div class="mark" aria-hidden="true">
